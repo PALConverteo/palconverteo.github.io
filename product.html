@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product - Mock Ecomm</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">MockEcomm</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="product-detail">
+      <img src="assets/img/product1.png" alt="Product Image" class="product-detail-img">
+      <div class="product-detail-info">
+        <h1 id="product-title">Smart Sneakers</h1>
+        <p id="product-price" class="product-detail-price">$120</p>
+        <p id="product-desc">Experience the next generation of comfort and style with our Smart Sneakers. Perfect for every step you take in 2025.</p>
+        <button class="btn-primary" id="add-to-cart">Add to Cart</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 MockEcomm. All rights reserved.</p>
+  </footer>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Placeholder: In a real app, fetch product info by ID from URL
+    document.getElementById('add-to-cart').onclick = function() {
+      alert('Added to cart! (mock)');
+    };
+  </script>
+</body>
+</html> 
