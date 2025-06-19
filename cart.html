@@ -6,6 +6,103 @@
   <title>Cart - Mock Ecomm</title>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .cart-section {
+      max-width: 600px;
+      margin: 3rem auto 2rem auto;
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 32px rgba(99, 102, 241, 0.10);
+      padding: 2.5rem 2rem 2rem 2rem;
+    }
+    .cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: #f8fafc;
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.06);
+    }
+    .cart-item img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 0.8rem;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+    }
+    .cart-item-info {
+      flex: 1;
+    }
+    .cart-item-info h3 {
+      margin: 0 0 0.3rem 0;
+      font-size: 1.1rem;
+      color: #222;
+    }
+    .cart-item-info p {
+      color: #6366f1;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+    .cart-qty {
+      width: 48px;
+      padding: 0.3rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e0e7ff;
+      margin-right: 1rem;
+      text-align: center;
+    }
+    .remove-btn {
+      margin-left: 0.5rem;
+      background: #fee2e2;
+      color: #dc2626;
+      border: none;
+      border-radius: 1.2rem;
+      padding: 0.4rem 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .remove-btn:hover {
+      background: #dc2626;
+      color: #fff;
+    }
+    .cart-summary {
+      text-align: right;
+      margin-top: 2rem;
+    }
+    .cart-summary p {
+      font-size: 1.2rem;
+      color: #222;
+      margin-bottom: 1.2rem;
+    }
+    .btn-primary {
+      font-size: 1.1rem;
+      padding: 0.8rem 2.2rem;
+      border-radius: 2rem;
+    }
+    @media (max-width: 700px) {
+      .cart-section {
+        padding: 1.2rem 0.5rem;
+      }
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .cart-item img {
+        width: 100%;
+        max-width: 220px;
+        height: auto;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -24,21 +121,21 @@
       <h2>Your Cart</h2>
       <div class="cart-items">
         <div class="cart-item">
-          <img src="assets/img/product1.svg" alt="Product 1">
+          <img src="https://picsum.photos/200/200?random=1" alt="Product 1">
           <div class="cart-item-info">
             <h3>Smart Sneakers</h3>
             <p>$120</p>
             <input type="number" value="1" min="1" class="cart-qty">
-            <button class="btn-secondary remove-btn">Remove</button>
+            <button class="remove-btn">Remove</button>
           </div>
         </div>
         <div class="cart-item">
-          <img src="assets/img/product2.svg" alt="Product 2">
+          <img src="https://picsum.photos/200/200?random=2" alt="Product 2">
           <div class="cart-item-info">
             <h3>Eco Hoodie</h3>
             <p>$80</p>
             <input type="number" value="2" min="1" class="cart-qty">
-            <button class="btn-secondary remove-btn">Remove</button>
+            <button class="remove-btn">Remove</button>
           </div>
         </div>
       </div>
@@ -53,7 +150,6 @@
   </footer>
   <script src="assets/js/main.js"></script>
   <script>
-    // Placeholder: In a real app, update/remove items dynamically
     document.querySelectorAll('.remove-btn').forEach(btn => {
       btn.onclick = function() {
         alert('Removed from cart! (mock)');
