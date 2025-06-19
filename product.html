@@ -6,6 +6,48 @@
   <title>Product - Mock Ecomm</title>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .product-detail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 500px;
+      margin: 3rem auto 2rem auto;
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 32px rgba(99, 102, 241, 0.10);
+      padding: 2.5rem 2rem 2rem 2rem;
+    }
+    .product-detail-img {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 1.2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 16px rgba(99, 102, 241, 0.10);
+    }
+    .product-detail-info h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+    .product-detail-price {
+      font-size: 1.5rem;
+      color: #6366f1;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .product-detail-info p {
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    .btn-primary {
+      font-size: 1.2rem;
+      padding: 1rem 2.5rem;
+      border-radius: 2rem;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -21,7 +63,7 @@
   </header>
   <main>
     <section class="product-detail">
-      <img src="assets/img/product1.svg" alt="Product Image" class="product-detail-img">
+      <img src="https://picsum.photos/200/200?random=1" alt="Smart Sneakers" class="product-detail-img">
       <div class="product-detail-info">
         <h1 id="product-title">Smart Sneakers</h1>
         <p id="product-price" class="product-detail-price">$120</p>
@@ -35,7 +77,6 @@
   </footer>
   <script src="assets/js/main.js"></script>
   <script>
-    // Placeholder: In a real app, fetch product info by ID from URL
     document.getElementById('add-to-cart').onclick = function() {
       alert('Added to cart! (mock)');
     };
