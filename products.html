@@ -71,7 +71,15 @@
   <script src="assets/js/header-loader.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Prepare item list for use in both view_item_list and select_item
+      // --- GA4 Page Load Events ---
+
+      // 1. page_view
+      window.dataLayer.push({
+        event: 'page_view',
+        page_category: 'Product Listing Page'
+      });
+
+      // 2. view_item_list for all products
       const productIdsOnPage = ['P1', 'P2', 'P3', 'P4', 'P5'];
       const productItems = productIdsOnPage.map((id, index) => {
         const product = productCatalog[id];
@@ -83,29 +91,15 @@
         };
       });
 
-      // --- GA4 Page Load Events ---
-      function firePageLoadEvents() {
-        // 1. page_view
-        window.dataLayer.push({
-          event: 'page_view',
-          page_category: 'Product Listing Page'
-        });
-
-        // 2. view_item_list for all products
-        window.dataLayer.push({ ecommerce: null });
-        window.dataLayer.push({
-          event: 'view_item_list',
-          ecommerce: {
-            item_list_id: 'all_products',
-            item_list_name: 'All Products',
-            items: productItems
-          }
-        });
-      }
-
-      // Wait for Axeptio to be ready before pushing page load events
-      window.addEventListener('axeptio_ready', firePageLoadEvents);
-
+      window.dataLayer.push({ ecommerce: null });
+      window.dataLayer.push({
+        event: 'view_item_list',
+        ecommerce: {
+          item_list_id: 'all_products',
+          item_list_name: 'All Products',
+          items: productItems
+        }
+      });
 
       // --- GA4 Interaction Events ---
 

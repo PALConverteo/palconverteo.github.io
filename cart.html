@@ -135,12 +135,10 @@
       const cartSummaryContainer = document.getElementById('cart-summary-container');
       const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
-      // GA4: page_view - waits for CMP
-      window.addEventListener('axeptio_ready', function() {
-        window.dataLayer.push({
-          event: 'page_view',
-          page_category: 'Cart'
-        });
+      // GA4: page_view
+      window.dataLayer.push({
+        event: 'page_view',
+        page_category: 'Cart'
       });
 
       if (cart.length === 0) {
