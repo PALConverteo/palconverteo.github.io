@@ -1,18 +1,15 @@
 // --- User Authentication and Management ---
 
-document.addEventListener('DOMContentLoaded', function() {
+// This function will be called by the header-loader once the header is injected.
+function initializeAuth() {
   const authButton = document.getElementById('auth-button');
   const loginModal = document.getElementById('login-modal');
   const closeModalButton = document.querySelector('.close-button');
   const loginForm = document.getElementById('login-form');
 
-  // SHA-256 hashing function (using browser's SubtleCrypto API)
-  async function sha256(message) {
-    const msgBuffer = new TextEncoder().encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return hashHex;
+  if (!authButton || !loginModal) {
+    console.error('Auth UI elements not found. Initialization failed.');
+    return;
   }
 
   function updateAuthState() {
@@ -66,9 +63,20 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Initial state check
   updateAuthState();
-});
+}
 
-// --- DataLayer Helper ---
+// --- Helper Functions (globally available) ---
+
+// SHA-256 hashing function (using browser's SubtleCrypto API)
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
+}
+
+// DataLayer Helper
 function enrichDataLayer(payload) {
   const user = JSON.parse(sessionStorage.getItem('user'));
   if (user && user.isLoggedIn) {
