@@ -271,28 +271,30 @@ footer {
   flex: 1;
 }
 
-/* General Button Styles */
+/* Button Styles */
 .btn {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: 12px 24px;
+  border: 1px solid transparent;
   border-radius: var(--border-radius);
-  text-decoration: none;
+  font-size: 1rem;
   font-weight: 600;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
   background-color: var(--color-primary);
   color: var(--color-white);
-  border: 1px solid var(--color-primary);
 }
 
 .btn:hover {
   background-color: var(--color-primary-dark);
 }
 
+/* Secondary / View button style */
 .btn-view {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 10px 20px;
   background-color: transparent;
   color: var(--color-primary);
   border: 1px solid var(--color-primary);
@@ -301,6 +303,7 @@ footer {
   text-decoration: none;
   font-weight: 600;
   margin-top: 1rem;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .btn-view:hover {
@@ -326,4 +329,6 @@ footer {
 
 .product-detail #add-to-cart-btn {
   flex-grow: 1;
+  padding: 14px 24px; /* Larger for more emphasis */
+  font-size: 1.1rem;
 } 
