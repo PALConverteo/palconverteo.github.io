@@ -13,16 +13,21 @@ header {
 
 .navbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  height: 70px;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
+  font-size: 1.5rem;
   font-weight: 700;
-  font-size: 1.6rem;
-  color: #6366f1;
-  letter-spacing: 1px;
+  color: var(--color-primary);
+  text-decoration: none;
 }
 
 .nav-links {
