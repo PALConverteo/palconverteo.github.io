@@ -87,24 +87,6 @@ header {
   color: #555;
 }
 
-.btn-primary {
-  background: linear-gradient(90deg, #6366f1 0%, #818cf8 100%);
-  color: #fff;
-  padding: 0.9rem 2.2rem;
-  border: none;
-  border-radius: 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.12);
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.btn-primary:hover {
-  background: linear-gradient(90deg, #818cf8 0%, #6366f1 100%);
-}
-
 .hero-img {
   width: 350px;
   border-radius: 1.5rem;
@@ -175,22 +157,6 @@ header {
   color: #6366f1;
   font-weight: 700;
   margin-bottom: 1rem;
-}
-
-.btn-secondary {
-  background: #f1f5f9;
-  color: #6366f1;
-  padding: 0.6rem 1.5rem;
-  border: none;
-  border-radius: 1.5rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
-}
-
-.btn-secondary:hover {
-  background: #6366f1;
-  color: #fff;
 }
 
 footer {
@@ -277,8 +243,112 @@ footer {
   cursor: pointer;
 }
 
+#login-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  text-align: left;
+}
+
+#login-form input[type="email"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#login-form input[type="email"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* --- Checkout Page --- */
+.checkout-section {
+    max-width: 960px;
+    margin: 3rem auto;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.checkout-form {
+    flex: 2;
+}
+
+.order-summary {
+    flex: 1;
+    position: sticky;
+    top: 120px;
+}
+
 .checkout-form, .order-summary {
-  flex: 1;
+  background-color: var(--color-white);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+}
+
+.checkout-form h2, .order-summary h3 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    color: #555;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+#confirmation {
+  text-align: center;
+  color: #222;
+  margin-top: 2rem;
 }
 
 /* Button Styles */
@@ -301,7 +371,6 @@ footer {
   background-color: var(--color-primary-dark);
 }
 
-/* Secondary / View button style */
 .btn-view {
   display: inline-block;
   padding: 10px 20px;
@@ -341,4 +410,14 @@ footer {
   flex-grow: 1;
   padding: 14px 24px; /* Larger for more emphasis */
   font-size: 1.1rem;
-} 
+}
+
+@media (max-width: 768px) {
+    .checkout-section {
+        flex-direction: column;
+    }
+    .order-summary {
+        position: static;
+        width: 100%;
+    }
+}
