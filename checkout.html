@@ -24,7 +24,7 @@
   <main>
     <section class="checkout-section">
       <div class="checkout-form">
-        <h2>Checkout</h2>
+        <h2>Shipping Information</h2>
         <form id="checkout-form">
           <div class="form-group">
             <label for="name">Full Name</label>
@@ -58,19 +58,16 @@
     document.addEventListener('DOMContentLoaded', function() {
       const summaryContainer = document.getElementById('order-summary-container');
       const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
-
       // GA4: page_view
       window.dataLayer.push(enrichDataLayer({
         event: 'page_view',
         page_category: 'Checkout'
       }));
-
       if (cart.length === 0) {
         summaryContainer.innerHTML = '<h3>Order Summary</h3><p>Your cart is empty.</p>';
         document.querySelector('.checkout-form').style.display = 'none';
         return;
       }
-
       let summaryHTML = '<h3>Order Summary</h3><ul>';
       let totalValue = 0;
       cart.forEach(item => {
@@ -84,11 +81,19 @@
       });
       summaryHTML += `</ul><p class="summary-total">Total: <strong>$${totalValue.toFixed(2)}</strong></p>`;
       summaryContainer.innerHTML = summaryHTML;
-
-      // GA4: purchase
+      
+      // GA4: begin_checkout
+      window.dataLayer.push({ ecommerce: null });
+      window.dataLayer.push(enrichDataLayer({
+          event: 'begin_checkout',
+          ecommerce: {
+              currency: 'USD',
+              value: totalValue,
+              items: cart
+          }
+      }));
       document.getElementById('checkout-form').addEventListener('submit', function(e) {
         e.preventDefault(); // Prevent actual form submission for this mock
-
         const transactionId = 'T' + Date.now();
         
         // Redirect to confirmation page
