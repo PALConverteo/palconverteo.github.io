@@ -91,25 +91,8 @@
 
         const transactionId = 'T' + Date.now();
         
-        window.dataLayer.push({ ecommerce: null });
-        window.dataLayer.push(enrichDataLayer({
-          event: 'purchase',
-          ecommerce: {
-            transaction_id: transactionId,
-            affiliation: 'MockEcomm Online Store',
-            value: totalValue,
-            tax: totalValue * 0.07, // Mock tax
-            shipping: 10.00, // Mock shipping
-            currency: 'USD',
-            coupon: '',
-            items: cart
-          }
-        }));
-
-        // Clear cart and thank user
-        sessionStorage.removeItem('cart');
-        alert('Thank you for your order! Transaction ID: ' + transactionId);
-        window.location.href = 'index.html';
+        // Redirect to confirmation page
+        window.location.href = `confirmation.html?id=${transactionId}&total=${totalValue}`;
       });
     });
   </script>

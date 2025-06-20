@@ -421,3 +421,30 @@ footer {
         width: 100%;
     }
 }
+
+/* --- Confirmation Page --- */
+.confirmation-section {
+    max-width: 600px;
+    margin: 3rem auto;
+    background-color: var(--color-white);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+#confirmation-message h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+#confirmation-message p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 0.8rem;
+}
+
+#confirmation-message .btn {
+    margin-top: 2rem;
+}
