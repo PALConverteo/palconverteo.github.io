@@ -6,4 +6,19 @@
     <li><a href="cart.html">Cart</a></li>
     <li><a href="checkout.html">Checkout</a></li>
   </ul>
-</nav> 
+  <div class="auth-section">
+    <button id="auth-button" class="btn-auth">Login</button>
+  </div>
+</nav>
+
+<div id="login-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <h3>Login</h3>
+    <form id="login-form">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <button type="submit" class="btn">Login</button>
+    </form>
+  </div>
+</div> 

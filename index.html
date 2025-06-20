@@ -65,15 +65,16 @@
     <p>&copy; 2025 MockEcomm. All rights reserved.</p>
   </footer>
   <script src="assets/js/product-data.js"></script>
+  <script src="assets/js/auth.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/header-loader.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // --- GA4 Page Load Events ---
-      window.dataLayer.push({
+      window.dataLayer.push(enrichDataLayer({
         event: 'page_view',
         page_category: 'Homepage'
-      });
+      }));
       const featuredProductIds = ['P1', 'P2', 'P3'];
       const featuredItems = featuredProductIds.map((id, index) => {
         const product = productCatalog[id];
@@ -85,14 +86,14 @@
         };
       });
       window.dataLayer.push({ ecommerce: null });
-      window.dataLayer.push({
+      window.dataLayer.push(enrichDataLayer({
         event: 'view_item_list',
         ecommerce: {
           item_list_id: 'featured_products',
           item_list_name: 'Featured Products',
           items: featuredItems
         }
-      });
+      }));
 
       // --- GA4 Interaction Events ---
       document.querySelectorAll('.product-link').forEach(link => {
@@ -102,20 +103,20 @@
 
           if (product) {
             window.dataLayer.push({ ecommerce: null });
-            window.dataLayer.push({
+            window.dataLayer.push(enrichDataLayer({
               event: 'select_item',
               ecommerce: {
                 item_list_id: 'featured_products',
                 item_list_name: 'Featured Products',
                 items: [product]
               }
-            });
+            }));
           }
         });
       });
       document.getElementById('shop-now-cta').addEventListener('click', function() {
         window.dataLayer.push({ ecommerce: null });
-        window.dataLayer.push({
+        window.dataLayer.push(enrichDataLayer({
           event: 'select_promotion',
           ecommerce: {
             promotion_id: 'promo_hero_shop_now',
@@ -124,7 +125,7 @@
             creative_slot: 'hero_slot_1',
             location_id: 'home_hero'
           }
-        });
+        }));
       });
     });
   </script>

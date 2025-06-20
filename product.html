@@ -74,6 +74,7 @@
     <p>&copy; 2025 MockEcomm. All rights reserved.</p>
   </footer>
   <script src="assets/js/product-data.js"></script>
+  <script src="assets/js/auth.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/header-loader.js"></script>
   <script>
@@ -107,19 +108,19 @@
 
       // --- GA4 Page Load Events ---
       const itemForGA = { ...product, quantity: 1 };
-      window.dataLayer.push({
+      window.dataLayer.push(enrichDataLayer({
         event: 'page_view',
         page_category: 'Product Detail Page'
-      });
+      }));
       window.dataLayer.push({ ecommerce: null });
-      window.dataLayer.push({
+      window.dataLayer.push(enrichDataLayer({
         event: 'view_item',
         ecommerce: {
           currency: 'USD',
           value: product.price,
           items: [itemForGA]
         }
-      });
+      }));
 
       // --- GA4 Interaction Events ---
       document.getElementById('add-to-cart-btn').addEventListener('click', function() {
@@ -127,14 +128,14 @@
         const itemForCart = { ...product, quantity: quantity };
         
         window.dataLayer.push({ ecommerce: null });
-        window.dataLayer.push({
+        window.dataLayer.push(enrichDataLayer({
           event: 'add_to_cart',
           ecommerce: {
             currency: 'USD',
             value: itemForCart.price * itemForCart.quantity,
             items: [itemForCart]
           }
-        });
+        }));
 
         // Add item to a client-side cart (using sessionStorage)
         let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
