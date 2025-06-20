@@ -62,15 +62,7 @@
   <script src="assets/js/header-loader.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // --- GA4 Events ---
-
-      // 1. page_view
-      window.dataLayer.push({
-        event: 'page_view',
-        page_category: 'Homepage'
-      });
-
-      // 2. view_item_list for featured products
+      // Prepare item list for use in both view_item_list and select_item
       const featuredProductIds = ['P1', 'P2', 'P3'];
       const featuredItems = featuredProductIds.map((id, index) => {
         const product = productCatalog[id];
@@ -82,15 +74,32 @@
         };
       });
 
-      window.dataLayer.push({ ecommerce: null });
-      window.dataLayer.push({
-        event: 'view_item_list',
-        ecommerce: {
-          item_list_id: 'featured_products',
-          item_list_name: 'Featured Products',
-          items: featuredItems
-        }
-      });
+      // --- GA4 Page Load Events ---
+      function firePageLoadEvents() {
+        // 1. page_view
+        window.dataLayer.push({
+          event: 'page_view',
+          page_category: 'Homepage'
+        });
+
+        // 2. view_item_list for featured products
+        window.dataLayer.push({ ecommerce: null });
+        window.dataLayer.push({
+          event: 'view_item_list',
+          ecommerce: {
+            item_list_id: 'featured_products',
+            item_list_name: 'Featured Products',
+            items: featuredItems
+          }
+        });
+      }
+
+      // Wait for Axeptio to be ready before pushing page load events
+      // This makes the dataLayer sequence cleaner for GTM triggers.
+      window.addEventListener('axeptio_ready', firePageLoadEvents);
+
+
+      // --- GA4 Interaction Events ---
 
       // 3. select_item from featured products
       document.querySelectorAll('.product-link').forEach(link => {
