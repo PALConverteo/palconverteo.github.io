@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mock Ecomm - Home</title>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
   <script src="assets/js/axeptio-loader.js"></script>
   <script src="https://cdn.amplitude.com/script/0ba00609316d33669d2a46ef98a0668f.experiment.js"></script>
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -17,7 +20,7 @@
       <div class="hero-content">
         <h1>Shop the Future</h1>
         <p>Discover the latest trends in our 2025 collection. Experience shopping like never before.</p>
-        <a href="products.html" class="btn-primary">Shop Now</a>
+        <a href="products.html" class="btn" id="shop-now-cta">Shop Now</a>
       </div>
       <img src="https://picsum.photos/600/300?random=1" alt="Shopify 2025 Hero" class="hero-img"/>
     </section>
@@ -25,22 +28,28 @@
       <h2>Featured Products</h2>
       <div class="product-grid">
         <div class="product-card">
-          <img src="https://picsum.photos/200/200?random=1" alt="Product 1">
-          <h3>Smart Sneakers</h3>
-          <p>$120</p>
-          <a href="product.html?id=1" class="btn-secondary">View</a>
+          <a href="product.html?id=P1" class="product-link" data-product-id="P1">
+            <img src="https://picsum.photos/id/1025/400/400" alt="Product 1">
+            <h3>Smart Sneakers</h3>
+            <p>$120</p>
+            <span class="btn-view">View</span>
+          </a>
         </div>
         <div class="product-card">
-          <img src="https://picsum.photos/200/200?random=2" alt="Product 2">
-          <h3>Eco Hoodie</h3>
-          <p>$80</p>
-          <a href="product.html?id=2" class="btn-secondary">View</a>
+          <a href="product.html?id=P2" class="product-link" data-product-id="P2">
+            <img src="https://picsum.photos/id/203/400/400" alt="Product 2">
+            <h3>Eco Hoodie</h3>
+            <p>$80</p>
+            <span class="btn-view">View</span>
+          </a>
         </div>
         <div class="product-card">
-          <img src="https://picsum.photos/200/200?random=3" alt="Product 3">
-          <h3>Wireless Earbuds</h3>
-          <p>$99</p>
-          <a href="product.html?id=3" class="btn-secondary">View</a>
+          <a href="product.html?id=P3" class="product-link" data-product-id="P3">
+            <img src="https://picsum.photos/id/237/400/400" alt="Product 3">
+            <h3>Wireless Earbuds</h3>
+            <p>$99</p>
+            <span class="btn-view">View</span>
+          </a>
         </div>
       </div>
     </section>
@@ -48,7 +57,76 @@
   <footer>
     <p>&copy; 2025 MockEcomm. All rights reserved.</p>
   </footer>
+  <script src="assets/js/product-data.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/header-loader.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // --- GA4 Events ---
+
+      // 1. page_view
+      window.dataLayer.push({
+        event: 'page_view',
+        page_category: 'Homepage'
+      });
+
+      // 2. view_item_list for featured products
+      const featuredProductIds = ['P1', 'P2', 'P3'];
+      const featuredItems = featuredProductIds.map((id, index) => {
+        const product = productCatalog[id];
+        return {
+          ...product,
+          index: index,
+          item_list_id: 'featured_products',
+          item_list_name: 'Featured Products'
+        };
+      });
+
+      window.dataLayer.push({ ecommerce: null });
+      window.dataLayer.push({
+        event: 'view_item_list',
+        ecommerce: {
+          item_list_id: 'featured_products',
+          item_list_name: 'Featured Products',
+          items: featuredItems
+        }
+      });
+
+      // 3. select_item from featured products
+      document.querySelectorAll('.product-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          const productId = this.dataset.productId;
+          const product = featuredItems.find(p => p.item_id === productCatalog[productId].item_id);
+
+          if (product) {
+            window.dataLayer.push({ ecommerce: null });
+            window.dataLayer.push({
+              event: 'select_item',
+              ecommerce: {
+                item_list_id: 'featured_products',
+                item_list_name: 'Featured Products',
+                items: [product]
+              }
+            });
+          }
+        });
+      });
+
+      // 4. "Shop Now" CTA click
+      document.getElementById('shop-now-cta').addEventListener('click', function() {
+        window.dataLayer.push({ ecommerce: null });
+        window.dataLayer.push({
+          event: 'select_promotion',
+          ecommerce: {
+            promotion_id: 'promo_hero_shop_now',
+            promotion_name: 'Hero Banner Shop Now',
+            creative_name: 'Hero Banner',
+            creative_slot: 'hero_slot_1',
+            location_id: 'home_hero'
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html> 

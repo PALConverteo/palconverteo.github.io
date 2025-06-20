@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart - Mock Ecomm</title>
+  <title>Mock Ecomm - Cart</title>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
   <script src="assets/js/axeptio-loader.js"></script>
   <script src="https://cdn.amplitude.com/script/0ba00609316d33669d2a46ef98a0668f.experiment.js"></script>
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -110,30 +113,14 @@
   <header id="header-placeholder"></header>
   <main>
     <section class="cart-section">
-      <h2>Your Cart</h2>
-      <div class="cart-items">
-        <div class="cart-item">
-          <img src="https://picsum.photos/200/200?random=1" alt="Product 1">
-          <div class="cart-item-info">
-            <h3>Smart Sneakers</h3>
-            <p>$120</p>
-            <input type="number" value="1" min="1" class="cart-qty">
-            <button class="remove-btn">Remove</button>
-          </div>
+      <div class="container">
+        <h2>Your Cart</h2>
+        <div id="cart-items-container">
+          <!-- Cart items will be injected here -->
         </div>
-        <div class="cart-item">
-          <img src="https://picsum.photos/200/200?random=2" alt="Product 2">
-          <div class="cart-item-info">
-            <h3>Eco Hoodie</h3>
-            <p>$80</p>
-            <input type="number" value="2" min="1" class="cart-qty">
-            <button class="remove-btn">Remove</button>
-          </div>
+        <div class="cart-summary" id="cart-summary-container" style="display: none;">
+          <!-- Summary will be injected here -->
         </div>
-      </div>
-      <div class="cart-summary">
-        <p>Total: <span id="cart-total">$280</span></p>
-        <a href="checkout.html" class="btn-primary">Proceed to Checkout</a>
       </div>
     </section>
   </main>
@@ -143,10 +130,56 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/header-loader.js"></script>
   <script>
-    document.querySelectorAll('.remove-btn').forEach(btn => {
-      btn.onclick = function() {
-        alert('Removed from cart! (mock)');
-      };
+    document.addEventListener('DOMContentLoaded', function() {
+      const cartItemsContainer = document.getElementById('cart-items-container');
+      const cartSummaryContainer = document.getElementById('cart-summary-container');
+      const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+      // GA4: page_view
+      window.dataLayer.push({
+        event: 'page_view',
+        page_category: 'Cart'
+      });
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+        return;
+      }
+
+      let cartHTML = '<ul>';
+      let totalValue = 0;
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        totalValue += itemTotal;
+        cartHTML += `
+          <li class="cart-item">
+            <span>${item.item_name} (x${item.quantity})</span>
+            <span>$${itemTotal.toFixed(2)}</span>
+          </li>
+        `;
+      });
+      cartHTML += '</ul>';
+      cartItemsContainer.innerHTML = cartHTML;
+
+      cartSummaryContainer.innerHTML = `
+        <h3>Summary</h3>
+        <p>Total: <strong>$${totalValue.toFixed(2)}</strong></p>
+        <a href="checkout.html" class="btn" id="checkout-btn">Proceed to Checkout</a>
+      `;
+      cartSummaryContainer.style.display = 'block';
+
+      // GA4: begin_checkout
+      document.getElementById('checkout-btn').addEventListener('click', function() {
+        window.dataLayer.push({ ecommerce: null });
+        window.dataLayer.push({
+          event: 'begin_checkout',
+          ecommerce: {
+            currency: 'USD',
+            value: totalValue,
+            items: cart
+          }
+        });
+      });
     });
   </script>
 </body>
